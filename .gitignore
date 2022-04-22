@@ -2,3 +2,4 @@
 #node
 *.env
 /node_modules
+/build
