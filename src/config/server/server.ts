@@ -52,7 +52,7 @@ export default class Server {
         if (path === null || path === undefined || path.match(Server.CONFIG_NAME_PAHT)) {
             throw new Error("The  path is null or invalid");
         }
-        return _express.route(path);
+        return _express.route("/" + path);
     }
 
     static start(): Server {

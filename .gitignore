@@ -1,4 +1,7 @@
 
+#vscode
+.vscode
+
 #node
 *.env
 /node_modules
