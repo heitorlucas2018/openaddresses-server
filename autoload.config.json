@@ -1,0 +1,11 @@
+{
+    "src":"",
+    "autoimport": true,
+    "exclusions": [
+        "services"
+    ],
+    "inclusions": [
+        "src/config/console/console.ts"
+    ]
+    
+}

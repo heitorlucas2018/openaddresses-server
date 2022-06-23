@@ -1,4 +1,7 @@
 
+#project
+/coverage
+
 #vscode
 .vscode
 
