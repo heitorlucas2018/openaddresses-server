@@ -1,6 +1,6 @@
 {
     "src":"",
-    "autoimport": true,
+    "autoimport": false,
     "exclusions": [
         "services"
     ],

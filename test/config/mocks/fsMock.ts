@@ -5,7 +5,8 @@ export default jest.mock("fs", () => {
         ...originalModule,
         readdirSync: (path: any) => (["name_to_file.txt"]),
         lstatSync: (path: any) => ({
-            isDirectory: jest.fn(() => (path.toString().indexOf(".txt") === -1))
+            isDirectory: jest.fn(() => (path.toString().indexOf(".txt") === -1)),
+            isFile: jest.fn(() => false)
         })
     }
 })

@@ -5,7 +5,7 @@ fsMock
 
 describe('Should to success', () => {
     const fullPath = "src/";
-    const mockArrayNameFile =  ["teste", "file", "file2"];
+    const mockArrayNameFile =  ["services","teste"];
  
     test('the load files', () => {
         autoLoadFiles()
