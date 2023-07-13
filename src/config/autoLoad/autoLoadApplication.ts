@@ -1,6 +1,6 @@
-import { resolveObjectURL } from "buffer";
 import { lstatSync, readdirSync } from "fs";
 import { join, resolve } from "path";
+
 import resolveConfig from "./resolveConfig";
 
 const config = resolveConfig()
@@ -14,7 +14,7 @@ export default function autoLoadFiles(): void {
         const arraysOfFiles: any[] = [];
         foreachFolder(files, fullPath, (file: string) => arraysOfFiles.push(file));
         if(config.autoimport) {
-            arraysOfFiles.concat(config.inclusions).forEach(file => {require(file)})
+            arraysOfFiles.concat(config.inclusions).forEach(component => require(component))
         }
     }
 }
@@ -25,10 +25,8 @@ export function foreachFolder(files: string[], relativePath: string, predicate?:
             .filter(path => !isExcludedPath(join(relativePath, path)))
             .map(file => {
                 const fullPath = join(relativePath, file);
-              
-                console.log(fullPath)
 
-                if(lstatSync(fullPath).isDirectory()) {
+                if (lstatSync(fullPath).isDirectory()) {
                     const filesToPath = readdirSync(fullPath);
                     return foreachFolder(filesToPath, fullPath, predicate);
                 }

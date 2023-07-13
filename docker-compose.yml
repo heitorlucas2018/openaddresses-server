@@ -6,7 +6,7 @@ networks:
     driver: bridge
 services:
   api:
-    image: node:14-alpine
+    image: node:18-alpine
     working_dir: /api
     environment:
       - PORT=3000
@@ -34,7 +34,7 @@ services:
     networks:
       - open-addresses-net
     ports:
-      - 27017
+      - 27017:27017
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example

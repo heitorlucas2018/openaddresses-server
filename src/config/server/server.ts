@@ -1,11 +1,7 @@
-import Express, { Request, Response } from 'express';
+import Express from 'express';
 import respUserNocache from 'nocache';
-import env from 'dotenv';
-import { useCache } from './serverCache';
+import { useCache } from './serverConfigCache';
 import Logger from '../console/console';
-
-env.config();
-const _express: Express.Express = Express();
 
 /**
  * Creating implementation to server using express framework
@@ -18,12 +14,12 @@ export default class Server {
      * @param express 
      * @param enableCache enable use  the cache
      */
-    constructor(private express = _express) {
+    constructor(private express:Express.Express = Express()) {
         this.init()
     }
 
-    init() {
-        if (eval(process.env.ENABLE_CACHE || 'false')) { 
+    init(enableCache: boolean = false) {
+        if (enableCache) { 
             this.cacheConfiguration()
         }
         this.defaultConfiguration()
@@ -43,7 +39,6 @@ export default class Server {
     private defaultConfiguration(): void {
         Logger.debug('Default Configuration')
         this.express.use(respUserNocache())
-        this.express.get("/health", (req, resp) => (resp.json({ status: 'UP' })))
         this.express.listen(process.env.PORT, () => Logger.log(`Server running in http://0.0.0.0:${process.env.PORT}`))
     }
 
@@ -52,7 +47,7 @@ export default class Server {
         if (path === null || path === undefined || path.match(Server.CONFIG_NAME_PAHT)) {
             throw new Error("The  path is null or invalid");
         }
-        return _express.route("/" + path);
+        return Express().route("/" + path);
     }
 
     static start(): Server {

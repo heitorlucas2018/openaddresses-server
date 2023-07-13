@@ -5,7 +5,7 @@ export default (): ConfigurationType => {
     const pathConfigJson = join(path.resolve(""), NAME_FILE_CONFIG);
     if( !!pathConfigJson && lstatSync(pathConfigJson).isFile()) {
         const config = require(pathConfigJson);
-        return JSON.parse(config);
+        return config;
     }
     return DEFAUTL_CONFIGURATION;
 }

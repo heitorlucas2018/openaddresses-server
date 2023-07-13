@@ -1,16 +1,12 @@
 import { Request, Response } from "express";
-import { RestController } from "../../config/decorators/controller";
+import { MethodsHttp, RestController } from "../../config/decorators/controller";
+import HealthService from "../services/healthService";
 
-const path = "teste"
+const path = "health"
 export default class Health {
-
-    @RestController("get", path)
+    @RestController(MethodsHttp.GET, path)
     get(req: Request, res: Response): Response{
-        return res.send({status: "ok"})
+        return new HealthService().verifyStatusInternalServices(req, res);
     }
 
-    @RestController("post", path)
-    teste(req: Request, res: Response): Response{
-        return res.send({status: req.method})
-    }
 }
